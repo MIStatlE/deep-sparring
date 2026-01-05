@@ -1,4 +1,4 @@
-# deep-sparring# Deep Sparring 🤺
+# Deep Sparring 🤺
 
 > **Don't just read proofs. Re-discover them.**
 > A Socratic AI Companion for Deep Reading in Mathematics & ML Theory.
@@ -23,29 +23,55 @@ It uses AI not to give you answers, but to:
 - **💬 Socratic Chat:** A built-in chat interface for each theorem. The AI acts as a tutor, guiding you through specific steps without spoiling the "Aha!" moment.
 - **⚡ High-Fidelity Rendering:** Full LaTeX support via KaTeX for crisp mathematical display.
 
-## 🛠 Tech Stack
+## 🏛 System Architecture
 
-- **Frontend:** Next.js 14, Tailwind CSS, Lucide React, React Markdown (remark-math/rehype-katex).
-- **Backend:** FastAPI (Python), PyMuPDF (PDF extraction).
-- **AI Core:** OpenAI API (Compatible with GPT-4o, DeepSeek, etc.).
+Deep Sparring uses a "Perception-Interaction" architecture to transform messy PDFs into structured learning experiences.
 
----
+```mermaid
+graph TD
+    User[👩‍💻 User] -->|Upload PDF| FE[Frontend (Next.js)]
+    FE -->|Raw File| BE[Backend (FastAPI)]
+    
+    subgraph "Perception Layer (Ingestion)"
+        BE -->|Extract Text| PyMuPDF
+        PyMuPDF -->|Noisy Text| LLM_Parser[LLM (GPT-4o)]
+        LLM_Parser -->|Aggressive Repair| JSON[Structured JSON]
+        JSON --"Theorem + Proof (Hidden)"--> DB[(In-Memory Store)]
+    end
+    
+    subgraph "Interaction Layer (Sparring)"
+        User --"Clicks Reveal"--> FE
+        User --"Asks Question"--> FE
+        FE -->|Query + Context| AI_Tutor[Socratic AI Agent]
+        AI_Tutor --"Heuristics / Hints"--> FE
+    end
+    
+    style LLM_Parser fill:#f9f,stroke:#333,stroke-width:2px
+    style AI_Tutor fill:#bbf,stroke:#333,stroke-width:2px
+```
+🛠 Tech Stack
+Frontend: Next.js 14, Tailwind CSS, Lucide React, React Markdown (remark-math/rehype-katex).
 
-## 🚀 Getting Started
+Backend: FastAPI (Python), PyMuPDF (PDF extraction).
 
+AI Core: OpenAI API (Compatible with GPT-4o, DeepSeek, etc.).
+
+🚀 Getting Started
 Follow these steps to run the project locally.
 
-### Prerequisites
+Prerequisites
 
-- Node.js & npm
-- Python 3.8+
-- An API Key (OpenAI, DeepSeek, or Moonshot)
+Node.js & npm
 
-### 1. Backend Setup
+Python 3.8+
+
+An API Key (OpenAI, DeepSeek, or Moonshot)
+
+1. Backend Setup
 
 The backend handles PDF parsing and LLM interaction.
 
-```bash
+Bash
 cd backend
 
 # 1. Install dependencies
