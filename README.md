@@ -29,20 +29,20 @@ Deep Sparring uses a "Perception-Interaction" architecture to transform messy PD
 
 ```mermaid
 graph TD
-    User[👩‍💻 User] -->|Upload PDF| FE[Frontend (Next.js)]
-    FE -->|Raw File| BE[Backend (FastAPI)]
+    User["👩‍💻 User"] -->|Upload PDF| FE["Frontend (Next.js)"]
+    FE -->|Raw File| BE["Backend (FastAPI)"]
     
     subgraph "Perception Layer (Ingestion)"
         BE -->|Extract Text| PyMuPDF
-        PyMuPDF -->|Noisy Text| LLM_Parser[LLM (GPT-4o)]
-        LLM_Parser -->|Aggressive Repair| JSON[Structured JSON]
-        JSON --"Theorem + Proof (Hidden)"--> DB[(In-Memory Store)]
+        PyMuPDF -->|Noisy Text| LLM_Parser["LLM (GPT-4o)"]
+        LLM_Parser -->|Aggressive Repair| JSON["Structured JSON"]
+        JSON --"Theorem + Proof (Hidden)"--> DB[("In-Memory Store")]
     end
     
     subgraph "Interaction Layer (Sparring)"
         User --"Clicks Reveal"--> FE
         User --"Asks Question"--> FE
-        FE -->|Query + Context| AI_Tutor[Socratic AI Agent]
+        FE -->|Query + Context| AI_Tutor["Socratic AI Agent"]
         AI_Tutor --"Heuristics / Hints"--> FE
     end
     
@@ -71,6 +71,7 @@ An API Key (OpenAI, DeepSeek, or Moonshot)
 
 The backend handles PDF parsing and LLM interaction.
 
+‘’‘bash
 cd backend
 
 # 1. Install dependencies
@@ -79,7 +80,7 @@ python -m pip install -r requirements.txt
 # 2. Configure Environment Variables
 # Create a .env file
 touch .env
-
+’‘’ 
 Open .env and add your API key:
 
 OPENAI_API_KEY=sk-your-api-key-here
