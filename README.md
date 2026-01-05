@@ -71,7 +71,6 @@ An API Key (OpenAI, DeepSeek, or Moonshot)
 
 The backend handles PDF parsing and LLM interaction.
 
-Bash
 cd backend
 
 # 1. Install dependencies
@@ -80,23 +79,20 @@ python -m pip install -r requirements.txt
 # 2. Configure Environment Variables
 # Create a .env file
 touch .env
+
 Open .env and add your API key:
 
-Code snippet
 OPENAI_API_KEY=sk-your-api-key-here
 # Optional: If using DeepSeek or local models
 # BASE_URL=[https://api.deepseek.com](https://api.deepseek.com)
 Run the Server:
 
-Bash
 python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-You should see: Application startup complete.
 
 2. Frontend Setup
 
 Open a new terminal for the frontend.
 
-Bash
 cd frontend
 
 # 1. Install dependencies
